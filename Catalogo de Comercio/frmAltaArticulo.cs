@@ -14,9 +14,17 @@ namespace Catalogo_de_Comercio
 {
     public partial class frmAltaArticulo : Form
     {
+        private Articulo articulo = null;
         public frmAltaArticulo()
         {
             InitializeComponent();
+        }
+        //Creo un nuevo constructor
+        public frmAltaArticulo(Articulo articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
+            Text = "Modifique su Artículo";
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -26,21 +34,33 @@ namespace Catalogo_de_Comercio
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            Articulo nuevo = new Articulo();
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
             
             try
             {
-                nuevo.Codigo = txtCodigo.Text;
-                nuevo.Descripcion = txtDescripcion.Text;
-                nuevo.Nombre = txtNombre.Text;
-                nuevo.Precio = decimal.Parse(txtPrecio.Text);
-                nuevo.ImagenUrl = txtImagenUrl.Text;
-                nuevo.Marca = (Marca)cmbMarca.SelectedItem;
-                nuevo.Categoria = (Categoria)cmbCategoria.SelectedItem;
-                //Aca debo llamar al metodo para agregarlo desde ArtNegocio:
-                articuloNegocio.Agregar(nuevo);
-                MessageBox.Show("Se agregó el artículo");
+                if (articulo == null)
+                {
+                    articulo = new Articulo();
+                }
+                articulo.Descripcion = txtDescripcion.Text;
+                articulo.Codigo = txtCodigo.Text;
+                articulo.Nombre = txtNombre.Text;
+                articulo.Precio = decimal.Parse(txtPrecio.Text);
+                articulo.ImagenUrl = txtImagenUrl.Text;
+                articulo.Marca = (Marca)cmbMarca.SelectedItem;
+                articulo.Categoria = (Categoria)cmbCategoria.SelectedItem;
+                //Aca debo llamar al metodo para agregarlo desde ArtNegocio o el metodo modificar, para eso valido que quiere hacer el usuario:
+                if (articulo.Id != 0)
+                {
+                    articuloNegocio.Modificar(articulo);
+                    MessageBox.Show("Sé modificó el artículo");
+                }
+                else
+                {
+                    articuloNegocio.Agregar(articulo);
+                    MessageBox.Show("Se agregó el artículo");
+                }
+
                 Close();
 
             }
@@ -65,6 +85,18 @@ namespace Catalogo_de_Comercio
                 cmbMarca.DataSource = marcaNegocio.listar();
                 cmbMarca.DisplayMember = "Descripcion";
                 cmbMarca.ValueMember = "Id";
+                //precargar pokemon si se clickeo modificar
+                if (articulo != null)
+                {
+                    txtNombre.Text = articulo.Nombre;
+                    txtCodigo.Text = articulo.Codigo;
+                    txtDescripcion.Text = articulo.Descripcion;
+                    txtImagenUrl.Text = articulo.ImagenUrl;
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    cargarImagen(articulo.ImagenUrl);
+                    cmbCategoria.SelectedValue = articulo.Categoria.Id;
+                    cmbMarca.SelectedValue = articulo.Marca.Id;
+                }
             }
             catch (Exception ex)
             {
@@ -79,9 +111,9 @@ namespace Catalogo_de_Comercio
             {
                 pbxArticulo.Load(imagen);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                pbxArticulo.Load("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/2560px-Placeholder_view_vector.svg.png");
+                pbxArticulo.Load("https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png");
                
             }
         }

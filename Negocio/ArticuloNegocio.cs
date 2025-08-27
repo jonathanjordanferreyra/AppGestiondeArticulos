@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -101,6 +102,34 @@ namespace Negocio
                 datos.SetearParametros("@Precio", articulo.Precio);
                 datos.EjecutarAccion();
 
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }            
+        }
+        //Método para modificar un articulo
+        public void Modificar(Articulo articuloSeleccionado)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.SetearConsulta("update ARTICULOS set Codigo = @Codigo,Nombre = @Nombre,Descripcion = @Descripcion,IdMarca = @IdMarca, IdCategoria = @IdCategoria,ImagenUrl = @ImagenUrl, Precio = @Precio where Id = @Id");
+                datos.SetearParametros("@Codigo", articuloSeleccionado.Codigo);
+                datos.SetearParametros("@Nombre", articuloSeleccionado.Nombre);
+                datos.SetearParametros("@Descripcion", articuloSeleccionado.Descripcion);
+                datos.SetearParametros("@IdMarca", articuloSeleccionado.Marca.Id);
+                datos.SetearParametros("@IdCategoria", articuloSeleccionado.Categoria.Id);
+                datos.SetearParametros("@ImagenUrl", articuloSeleccionado.ImagenUrl);
+                datos.SetearParametros("@Precio", articuloSeleccionado.Precio);
+                datos.SetearParametros("@Id", articuloSeleccionado.Id);
+
+                datos.EjecutarAccion();
             }
             catch (Exception ex)
             {

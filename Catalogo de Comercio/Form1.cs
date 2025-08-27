@@ -53,7 +53,7 @@ namespace Catalogo_de_Comercio
             }
             catch (FileNotFoundException)
             {
-                pbxArticulo.Load("https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/2560px-Placeholder_view_vector.svg.png");
+                pbxArticulo.Load("https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png");
             }
             catch (System.Net.WebException)
             {
@@ -67,13 +67,41 @@ namespace Catalogo_de_Comercio
             }
 
         }
+        //metodo para recargar la grilla
+        private void CargarGrilla()
+        {
+            try
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                dgvArticulos.DataSource = negocio.Listar();
+                dgvArticulos.Columns["Id"].Visible = false;
+                dgvArticulos.Columns["ImagenUrl"].Visible = false;
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            ArticuloNegocio cargar = new ArticuloNegocio();
             frmAltaArticulo Alta = new frmAltaArticulo();
             Alta.ShowDialog();
-            dgvArticulos.DataSource = cargar.Listar();
+            CargarGrilla();
+        }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            if (dgvArticulos.CurrentRow == null)
+            {
+                MessageBox.Show("Seleccione un artículo para modificar");
+                return;
+            }
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+            frmAltaArticulo Modificar = new frmAltaArticulo(seleccionado);
+            Modificar.ShowDialog();
+            CargarGrilla();
         }
     }
 }
