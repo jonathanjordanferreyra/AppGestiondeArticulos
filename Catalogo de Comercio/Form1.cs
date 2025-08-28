@@ -103,5 +103,35 @@ namespace Catalogo_de_Comercio
             Modificar.ShowDialog();
             CargarGrilla();
         }
+
+        private void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            Articulo seleccionado;
+            try
+            {
+                seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                if (seleccionado == null) 
+                {
+                    MessageBox.Show("Debe seleccionar un Artículo para eliminar","Eliminar",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                }
+                else
+                {
+                    DialogResult respuesta = MessageBox.Show("¿Desea eliminar DEFINITIVAMENTE el Articulo?", "Eliminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (respuesta == DialogResult.Yes)
+                    {
+                       negocio.Eliminar(seleccionado.Id);
+                       CargarGrilla();
+                    }
+                    
+                }
+                    
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
     }
 }
