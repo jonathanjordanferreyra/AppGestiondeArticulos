@@ -28,17 +28,30 @@ namespace Catalogo_de_Comercio
             dgvArticulos.DataSource = listaArticulo;
             pbxArticulo.Load(listaArticulo[0].ImagenUrl);
 
+            OcultarColumnas();
+            cboCampo.Items.Add("Código");
+            cboCampo.Items.Add("Nombre");
+            cboCampo.Items.Add("Descripción");
+
+            cboCampo.Items.Add("Marca");
+            cboCampo.Items.Add("Categoría");
+
+        }
+        private void OcultarColumnas()
+        {
             dgvArticulos.Columns["Id"].Visible = false;
             dgvArticulos.Columns["ImagenUrl"].Visible = false;
-
         }
 
         private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
         {
             try
             {
-                Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                CargarImagen(seleccionado.ImagenUrl);
+                if (dgvArticulos.CurrentRow != null) 
+                { 
+                    Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                    CargarImagen(seleccionado.ImagenUrl);
+                }
             }
             catch (Exception ex)
             {
@@ -58,7 +71,7 @@ namespace Catalogo_de_Comercio
             catch (System.Net.WebException)
             {
                 //Aca me da error de web 403, creo que no es un problema con mi codigo, si no con la URL de la base de datos.
-                MessageBox.Show("No se pudo cargar la imagen (Error 403 Servidor remoto), se muestra una por defecto...");
+               // MessageBox.Show("No se pudo cargar la imagen (Error 403 Servidor remoto), se muestra una por defecto...");
                 pbxArticulo.Load("https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png");
             }
             catch (Exception ex)
@@ -74,8 +87,7 @@ namespace Catalogo_de_Comercio
             {
                 ArticuloNegocio negocio = new ArticuloNegocio();
                 dgvArticulos.DataSource = negocio.Listar();
-                dgvArticulos.Columns["Id"].Visible = false;
-                dgvArticulos.Columns["ImagenUrl"].Visible = false;
+                OcultarColumnas();
             }
             catch (Exception ex) 
             {
@@ -132,6 +144,99 @@ namespace Catalogo_de_Comercio
 
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void txtFiltroRapido_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> listaFiltrada;
+            if (txtFiltroRapido.Text != "")
+            {
+                listaFiltrada = listaArticulo.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltroRapido.Text.ToUpper()) || x.Codigo.ToUpper().Contains(txtFiltroRapido.Text.ToUpper()));
+            }
+            else
+            {
+                listaFiltrada = listaArticulo;
+            }
+            dgvArticulos.DataSource = null;
+            dgvArticulos.DataSource = listaFiltrada;
+            OcultarColumnas();
+
+        }
+
+        //metodos para cargar el combo box criterio.
+        private void cargarCriterioString()
+        {
+            cboCriterio.Items.Clear();
+            cboCriterio.Items.Add("Empieza con");
+            cboCriterio.Items.Add("Termina con");
+            cboCriterio.Items.Add("Contiene");
+            cboCriterio.SelectedItem = "Empieza con";
+        }
+        private void cargarCriterioCategoria()
+        {
+            CategoriaNegocio negocioCategoria = new CategoriaNegocio();
+            cboCriterio.DataSource = negocioCategoria.listar();
+            cboCriterio.DisplayMember = "Descripcion";
+            cboCriterio.ValueMember = "Id";
+        }
+        private void cargarCriterioMarca()
+        {
+            MarcaNegocio negocioMarca = new MarcaNegocio();
+            cboCriterio.DataSource = negocioMarca.listar();
+            cboCriterio.DisplayMember = "Descripcion";
+            cboCriterio.ValueMember = "Id";
+        }
+        private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                cboCriterio.DataSource = null;
+
+                string opcion = cboCampo.SelectedItem.ToString();
+                if (opcion == "Código" || opcion == "Nombre" || opcion == "Descripción")
+                {
+                    txtFiltroAvanzado.Enabled = true;
+
+                    cargarCriterioString();
+                }
+                else if (opcion == "Categoría")
+                {
+                    cargarCriterioCategoria();
+                    txtFiltroAvanzado.Enabled = false;
+                }
+                else
+                {
+                    cargarCriterioMarca();
+                    txtFiltroAvanzado.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error al cargar los criterios " + ex.Message);
+            }
+            
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            ArticuloNegocio negocio = new ArticuloNegocio();
+            try
+            {
+                string campo = cboCampo.SelectedItem.ToString();
+                string criterio = cboCriterio.SelectedItem.ToString();
+                string filtro = txtFiltroAvanzado.Text;
+                dgvArticulos.DataSource = null;
+                dgvArticulos.DataSource = negocio.filtrar(campo, criterio, filtro);
+                OcultarColumnas();
+                
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+            
         }
     }
 }
