@@ -51,6 +51,10 @@ namespace Catalogo_de_Comercio
                 { 
                     Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
                     CargarImagen(seleccionado.ImagenUrl);
+                    txtCodigo.Text = seleccionado.Codigo;
+                    txtDescripcion.Text = seleccionado.Descripcion;
+                    txtNombre.Text = seleccionado.Nombre;
+                    txtPrecio.Text = seleccionado.Precio.ToString();
                 }
             }
             catch (Exception ex)
@@ -223,12 +227,20 @@ namespace Catalogo_de_Comercio
             ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
-                string campo = cboCampo.SelectedItem.ToString();
-                string criterio = cboCriterio.SelectedItem.ToString();
-                string filtro = txtFiltroAvanzado.Text;
-                dgvArticulos.DataSource = null;
-                dgvArticulos.DataSource = negocio.filtrar(campo, criterio, filtro);
-                OcultarColumnas();
+                if (cboCampo != null || cboCriterio != null)
+                {
+                    string campo = cboCampo.SelectedItem.ToString();
+                    string criterio = cboCriterio.SelectedItem.ToString();
+                    string filtro = txtFiltroAvanzado.Text;
+                    dgvArticulos.DataSource = null;
+                    dgvArticulos.DataSource = negocio.filtrar(campo, criterio, filtro);
+                    OcultarColumnas();
+                }
+                else
+                {
+                    MessageBox.Show("Ingrese un campo y un criterio para buscar.", "Complete los campos",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+                }
+                
                 
             }
             catch (Exception ex)
