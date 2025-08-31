@@ -68,19 +68,15 @@ namespace Catalogo_de_Comercio
             {
                 pbxArticulo.Load(imagen);
             }
-            catch (FileNotFoundException)
-            {
-                pbxArticulo.Load("https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png");
-            }
             catch (System.Net.WebException)
             {
                 //Aca me da error de web 403, creo que no es un problema con mi codigo, si no con la URL de la base de datos.
                // MessageBox.Show("No se pudo cargar la imagen (Error 403 Servidor remoto), se muestra una por defecto...");
                 pbxArticulo.Load("https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png");
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                MessageBox.Show((ex.ToString()));  
+                pbxArticulo.Load("https://storage.googleapis.com/proudcity/mebanenc/uploads/2021/03/placeholder-image.png");
             }
 
         }
@@ -110,7 +106,7 @@ namespace Catalogo_de_Comercio
         {
             if (dgvArticulos.CurrentRow == null)
             {
-                MessageBox.Show("Seleccione un artículo para modificar");
+                MessageBox.Show("Seleccione un artículo para modificar","No hay ningún artículo seleccionado",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 return;
             }
             Articulo seleccionado;
@@ -126,13 +122,13 @@ namespace Catalogo_de_Comercio
             Articulo seleccionado;
             try
             {
-                seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
-                if (seleccionado == null) 
+                if (dgvArticulos.CurrentRow == null) 
                 {
                     MessageBox.Show("Debe seleccionar un Artículo para eliminar","Eliminar",MessageBoxButtons.OK,MessageBoxIcon.Information);
                 }
                 else
                 {
+                    seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
                     DialogResult respuesta = MessageBox.Show("¿Desea eliminar DEFINITIVAMENTE el Articulo?", "Eliminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (respuesta == DialogResult.Yes)
                     {
@@ -190,29 +186,52 @@ namespace Catalogo_de_Comercio
             cboCriterio.DisplayMember = "Descripcion";
             cboCriterio.ValueMember = "Id";
         }
+        private void validarCampoyCriterio()
+        {
+            if (cboCampo.SelectedIndex >= 0)
+            {
+                cboCampo.BackColor = SystemColors.Window;
+                cboCriterio.BackColor = SystemColors.Window;
+                lblast1.Visible = false;
+                lblast2.Visible = false;
+            }
+            else
+            {
+                cboCampo.BackColor = Color.Red;
+                cboCriterio.BackColor = Color.Red;
+                lblast1.Visible = true;
+                lblast2.Visible = true;
+            }
+        }
         private void cboCampo_SelectedIndexChanged(object sender, EventArgs e)
         {
+            validarCampoyCriterio();
             try
             {
                 cboCriterio.DataSource = null;
+                if (cboCampo.SelectedIndex >= 0)
+                {
+                    lblast1.Visible=false;
+                    cboCampo.BackColor= SystemColors.Window;
+                    string opcion = cboCampo.SelectedItem.ToString();
+                    if (opcion == "Código" || opcion == "Nombre" || opcion == "Descripción")
+                    {
+                        txtFiltroAvanzado.Enabled = true;
 
-                string opcion = cboCampo.SelectedItem.ToString();
-                if (opcion == "Código" || opcion == "Nombre" || opcion == "Descripción")
-                {
-                    txtFiltroAvanzado.Enabled = true;
+                        cargarCriterioString();
+                    }
+                    else if (opcion == "Categoría")
+                    {
+                        cargarCriterioCategoria();
+                        txtFiltroAvanzado.Enabled = false;
+                    }
+                    else
+                    {
+                        cargarCriterioMarca();
+                        txtFiltroAvanzado.Enabled = false;
+                    }
+                }
 
-                    cargarCriterioString();
-                }
-                else if (opcion == "Categoría")
-                {
-                    cargarCriterioCategoria();
-                    txtFiltroAvanzado.Enabled = false;
-                }
-                else
-                {
-                    cargarCriterioMarca();
-                    txtFiltroAvanzado.Enabled = false;
-                }
             }
             catch (Exception ex)
             {
@@ -227,7 +246,7 @@ namespace Catalogo_de_Comercio
             ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
-                if (cboCampo != null || cboCriterio != null)
+                if (cboCampo.SelectedIndex >= 0)
                 {
                     string campo = cboCampo.SelectedItem.ToString();
                     string criterio = cboCriterio.SelectedItem.ToString();
@@ -238,16 +257,32 @@ namespace Catalogo_de_Comercio
                 }
                 else
                 {
-                    MessageBox.Show("Ingrese un campo y un criterio para buscar.", "Complete los campos",MessageBoxButtons.OK,MessageBoxIcon.Asterisk);
+                    MessageBox.Show("Ingrese un campo y un criterio para buscar.", "Complete los campos", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    validarCampoyCriterio();
+
                 }
-                
-                
+
+
             }
             catch (Exception ex)
             {
 
                 MessageBox.Show(ex.ToString());
             }
+            
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            CargarGrilla();
+            cboCampo.SelectedIndex = -1;
+            cboCampo.BackColor  = SystemColors.Window;
+            lblast1.Visible = false;
+            cboCriterio.SelectedIndex = -1;
+            cboCriterio.BackColor = SystemColors.Window;
+            lblast2.Visible = false;
+            txtFiltroAvanzado.Clear();
+            txtFiltroRapido.Clear();
             
         }
     }

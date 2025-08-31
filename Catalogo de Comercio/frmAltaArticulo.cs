@@ -32,6 +32,68 @@ namespace Catalogo_de_Comercio
             Close();
         }
 
+        private bool validarCampos()
+        {
+            int cont = 0;
+            if(txtCodigo.Text == "")
+            {
+                lblast3.Visible = true;
+                txtCodigo.BackColor = Color.Red;
+                cont = 1;
+            }
+            else
+            {
+                lblast3.Visible = false;
+                txtCodigo.BackColor = Color.White;
+            }
+            if (txtNombre.Text == "")
+            {
+                lblast4.Visible = true;
+                txtNombre.BackColor = Color.Red;
+                cont = 1;
+            }
+            else
+            {
+                lblast4.Visible = false;
+                txtNombre.BackColor = Color.White;
+            }
+            if (txtDescripcion.Text == "")
+            {
+                lblast5.Visible = true;
+                txtDescripcion.BackColor = Color.Red;
+                cont = 1;
+            }
+            else
+            {
+                lblast5.Visible = false;
+                txtDescripcion.BackColor = Color.White;
+            }
+            //valido que se ingrese un decimal con TryParse que devuelve true si no hay letras.
+            decimal precio;
+            if (decimal.TryParse(txtPrecio.Text, out precio))
+            {
+                txtPrecio.BackColor = Color.White;
+                lblast8.Visible = false;
+            }
+            else
+            {
+                txtPrecio.BackColor = Color.Red;
+                lblast8.Visible = true;
+                MessageBox.Show("Formato incorrecto en el precio, solo números.", "Precio incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            if(cont == 1)
+            {
+                MessageBox.Show("Complete los campos obligatorios (Marcados en rojo)", "Campos incompletos", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cont = 0;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+        }
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio articuloNegocio = new ArticuloNegocio();
@@ -42,26 +104,35 @@ namespace Catalogo_de_Comercio
                 {
                     articulo = new Articulo();
                 }
-                articulo.Descripcion = txtDescripcion.Text;
-                articulo.Codigo = txtCodigo.Text;
-                articulo.Nombre = txtNombre.Text;
-                articulo.Precio = decimal.Parse(txtPrecio.Text);
-                articulo.ImagenUrl = txtImagenUrl.Text;
-                articulo.Marca = (Marca)cmbMarca.SelectedItem;
-                articulo.Categoria = (Categoria)cmbCategoria.SelectedItem;
-                //Aca debo llamar al metodo para agregarlo desde ArtNegocio o el metodo modificar, para eso valido que quiere hacer el usuario:
-                if (articulo.Id != 0)
+                bool bandera = validarCampos();
+                if (bandera) 
                 {
-                    articuloNegocio.Modificar(articulo);
-                    MessageBox.Show("Sé modificó el artículo");
-                }
-                else
-                {
-                    articuloNegocio.Agregar(articulo);
-                    MessageBox.Show("Se agregó el artículo");
-                }
+                    articulo.Descripcion = txtDescripcion.Text;
+                    articulo.Codigo = txtCodigo.Text;
+                    articulo.Nombre = txtNombre.Text;
+                    articulo.ImagenUrl = txtImagenUrl.Text;
+                    articulo.Marca = (Marca)cmbMarca.SelectedItem;
+                    articulo.Categoria = (Categoria)cmbCategoria.SelectedItem;
+                    decimal precio;
+                    //si da true es porque es decimal y puedo convertirlo.
+                    if (decimal.TryParse(txtPrecio.Text, out precio))
+                    {
+                        articulo.Precio = decimal.Parse(txtPrecio.Text);
+                    }
+                    //Aca debo llamar al metodo para agregarlo desde ArtNegocio o el metodo modificar, para eso valido que quiere hacer el usuario:
+                    if (articulo.Id != 0)
+                    {
+                        articuloNegocio.Modificar(articulo);
+                        MessageBox.Show("Sé modificó el artículo");
+                    }
+                    else
+                    {
+                        articuloNegocio.Agregar(articulo);
+                        MessageBox.Show("Se agregó el artículo");
+                    }
 
-                Close();
+                    Close();
+                }
 
             }
             catch (Exception ex)
