@@ -37,6 +37,30 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+        //Metodo para agregar Categoria a la DB
+        public void Agregar(Categoria nuevaCategoria)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                List<Categoria> CategoriasExistentes = listar();
+                if (CategoriasExistentes.Any(x => x.Descripcion.ToUpper() == nuevaCategoria.Descripcion.ToUpper()))
+                {
+                    throw new Exception("Esta categoría ya existe, ingrese una nueva.");
+                }
+                datos.SetearConsulta("insert into CATEGORIAS (Descripcion) values (@Descripcion)");
+                datos.SetearParametros("@Descripcion",nuevaCategoria.Descripcion);
+                datos.EjecutarAccion();
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
     }
 }

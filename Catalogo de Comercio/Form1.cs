@@ -35,7 +35,8 @@ namespace Catalogo_de_Comercio
 
             cboCampo.Items.Add("Marca");
             cboCampo.Items.Add("Categoría");
-
+            //contador de registros
+            lbltotalarticulos.Text = dgvArticulos.RowCount.ToString();
         }
         private void OcultarColumnas()
         {
@@ -100,6 +101,7 @@ namespace Catalogo_de_Comercio
             frmAltaArticulo Alta = new frmAltaArticulo();
             Alta.ShowDialog();
             CargarGrilla();
+            lbltotalarticulos.Text = dgvArticulos.RowCount.ToString();
         }
 
         private void btnModificar_Click(object sender, EventArgs e)
@@ -114,6 +116,7 @@ namespace Catalogo_de_Comercio
             frmAltaArticulo Modificar = new frmAltaArticulo(seleccionado);
             Modificar.ShowDialog();
             CargarGrilla();
+            lbltotalarticulos.Text = dgvArticulos.RowCount.ToString();
         }
 
         private void btnEliminar_Click(object sender, EventArgs e)
@@ -134,8 +137,9 @@ namespace Catalogo_de_Comercio
                     {
                        negocio.Eliminar(seleccionado.Id);
                        CargarGrilla();
+                       lbltotalarticulos.Text = dgvArticulos.RowCount.ToString();
                     }
-                    
+
                 }
                     
             }
@@ -275,6 +279,7 @@ namespace Catalogo_de_Comercio
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             CargarGrilla();
+            lbltotalarticulos.Text = dgvArticulos.RowCount.ToString();
             cboCampo.SelectedIndex = -1;
             cboCampo.BackColor  = SystemColors.Window;
             lblast1.Visible = false;

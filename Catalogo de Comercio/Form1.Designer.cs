@@ -33,6 +33,8 @@ namespace Catalogo_de_Comercio
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dgvArticulos = new System.Windows.Forms.DataGridView();
             this.btnLimpiar = new System.Windows.Forms.Button();
             this.lblCampo = new System.Windows.Forms.Label();
@@ -60,6 +62,8 @@ namespace Catalogo_de_Comercio
             this.txtFiltroRapido = new System.Windows.Forms.TextBox();
             this.lblast1 = new System.Windows.Forms.Label();
             this.lblast2 = new System.Windows.Forms.Label();
+            this.lblRegistros = new System.Windows.Forms.Label();
+            this.lbltotalarticulos = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvArticulos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.lblDescripción.SuspendLayout();
@@ -67,27 +71,31 @@ namespace Catalogo_de_Comercio
             // 
             // dgvArticulos
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(240)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.dgvArticulos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvArticulos.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvArticulos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvArticulos.BackgroundColor = System.Drawing.Color.White;
+            this.dgvArticulos.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.dgvArticulos.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dgvArticulos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.SingleHorizontal;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(45)))), ((int)(((byte)(45)))), ((int)(((byte)(48)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Red;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvArticulos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvArticulos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvArticulos.ColumnHeadersHeight = 40;
+            this.dgvArticulos.Cursor = System.Windows.Forms.Cursors.Cross;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(122)))), ((int)(((byte)(204)))));
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.Red;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvArticulos.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvArticulos.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
@@ -96,8 +104,18 @@ namespace Catalogo_de_Comercio
             this.dgvArticulos.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvArticulos.MultiSelect = false;
             this.dgvArticulos.Name = "dgvArticulos";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.LightSkyBlue;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvArticulos.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvArticulos.RowHeadersWidth = 51;
-            this.dgvArticulos.RowTemplate.Height = 24;
+            dataGridViewCellStyle5.Padding = new System.Windows.Forms.Padding(10, 5, 10, 5);
+            this.dgvArticulos.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            this.dgvArticulos.RowTemplate.Height = 35;
             this.dgvArticulos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvArticulos.Size = new System.Drawing.Size(837, 511);
             this.dgvArticulos.TabIndex = 0;
@@ -112,7 +130,7 @@ namespace Catalogo_de_Comercio
             this.btnLimpiar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.Size = new System.Drawing.Size(81, 29);
-            this.btnLimpiar.TabIndex = 5;
+            this.btnLimpiar.TabIndex = 8;
             this.btnLimpiar.Text = "Limpiar";
             this.btnLimpiar.UseVisualStyleBackColor = false;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -120,7 +138,7 @@ namespace Catalogo_de_Comercio
             // lblCampo
             // 
             this.lblCampo.AutoSize = true;
-            this.lblCampo.BackColor = System.Drawing.Color.Ivory;
+            this.lblCampo.BackColor = System.Drawing.Color.LightSalmon;
             this.lblCampo.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCampo.Location = new System.Drawing.Point(30, 24);
             this.lblCampo.Name = "lblCampo";
@@ -131,7 +149,7 @@ namespace Catalogo_de_Comercio
             // lblCriterio
             // 
             this.lblCriterio.AutoSize = true;
-            this.lblCriterio.BackColor = System.Drawing.Color.Ivory;
+            this.lblCriterio.BackColor = System.Drawing.Color.LightSalmon;
             this.lblCriterio.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCriterio.Location = new System.Drawing.Point(239, 24);
             this.lblCriterio.Name = "lblCriterio";
@@ -142,7 +160,7 @@ namespace Catalogo_de_Comercio
             // lblFiltroAvanzado
             // 
             this.lblFiltroAvanzado.AutoSize = true;
-            this.lblFiltroAvanzado.BackColor = System.Drawing.Color.Ivory;
+            this.lblFiltroAvanzado.BackColor = System.Drawing.Color.LightSalmon;
             this.lblFiltroAvanzado.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFiltroAvanzado.Location = new System.Drawing.Point(453, 23);
             this.lblFiltroAvanzado.Name = "lblFiltroAvanzado";
@@ -160,7 +178,7 @@ namespace Catalogo_de_Comercio
             this.cboCampo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cboCampo.Name = "cboCampo";
             this.cboCampo.Size = new System.Drawing.Size(140, 28);
-            this.cboCampo.TabIndex = 11;
+            this.cboCampo.TabIndex = 4;
             this.cboCampo.SelectedIndexChanged += new System.EventHandler(this.cboCampo_SelectedIndexChanged);
             // 
             // cboCriterio
@@ -172,7 +190,7 @@ namespace Catalogo_de_Comercio
             this.cboCriterio.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cboCriterio.Name = "cboCriterio";
             this.cboCriterio.Size = new System.Drawing.Size(140, 28);
-            this.cboCriterio.TabIndex = 12;
+            this.cboCriterio.TabIndex = 5;
             // 
             // txtFiltroAvanzado
             // 
@@ -182,7 +200,7 @@ namespace Catalogo_de_Comercio
             this.txtFiltroAvanzado.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtFiltroAvanzado.Name = "txtFiltroAvanzado";
             this.txtFiltroAvanzado.Size = new System.Drawing.Size(181, 27);
-            this.txtFiltroAvanzado.TabIndex = 14;
+            this.txtFiltroAvanzado.TabIndex = 6;
             // 
             // btnBuscar
             // 
@@ -193,7 +211,7 @@ namespace Catalogo_de_Comercio
             this.btnBuscar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(81, 29);
-            this.btnBuscar.TabIndex = 15;
+            this.btnBuscar.TabIndex = 7;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = false;
             this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
@@ -222,6 +240,8 @@ namespace Catalogo_de_Comercio
             // 
             // lblDescripción
             // 
+            this.lblDescripción.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lblDescripción.BackColor = System.Drawing.Color.Gainsboro;
             this.lblDescripción.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lblDescripción.Controls.Add(this.txtDescripcion);
@@ -349,7 +369,7 @@ namespace Catalogo_de_Comercio
             this.btnAgregar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(97, 35);
-            this.btnAgregar.TabIndex = 2;
+            this.btnAgregar.TabIndex = 1;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
@@ -363,7 +383,7 @@ namespace Catalogo_de_Comercio
             this.btnModificar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnModificar.Name = "btnModificar";
             this.btnModificar.Size = new System.Drawing.Size(97, 35);
-            this.btnModificar.TabIndex = 3;
+            this.btnModificar.TabIndex = 2;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = false;
             this.btnModificar.Click += new System.EventHandler(this.btnModificar_Click);
@@ -377,7 +397,7 @@ namespace Catalogo_de_Comercio
             this.btnEliminar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnEliminar.Name = "btnEliminar";
             this.btnEliminar.Size = new System.Drawing.Size(97, 35);
-            this.btnEliminar.TabIndex = 4;
+            this.btnEliminar.TabIndex = 3;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = false;
             this.btnEliminar.Click += new System.EventHandler(this.btnEliminar_Click);
@@ -385,7 +405,7 @@ namespace Catalogo_de_Comercio
             // lblFiltro
             // 
             this.lblFiltro.AutoSize = true;
-            this.lblFiltro.BackColor = System.Drawing.Color.Ivory;
+            this.lblFiltro.BackColor = System.Drawing.Color.LightSalmon;
             this.lblFiltro.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblFiltro.Location = new System.Drawing.Point(30, 580);
             this.lblFiltro.Name = "lblFiltro";
@@ -395,11 +415,11 @@ namespace Catalogo_de_Comercio
             // 
             // txtFiltroRapido
             // 
-            this.txtFiltroRapido.Location = new System.Drawing.Point(147, 577);
+            this.txtFiltroRapido.Location = new System.Drawing.Point(153, 577);
             this.txtFiltroRapido.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtFiltroRapido.Name = "txtFiltroRapido";
             this.txtFiltroRapido.Size = new System.Drawing.Size(181, 27);
-            this.txtFiltroRapido.TabIndex = 7;
+            this.txtFiltroRapido.TabIndex = 9;
             this.txtFiltroRapido.TextChanged += new System.EventHandler(this.txtFiltroRapido_TextChanged);
             // 
             // lblast1
@@ -426,12 +446,37 @@ namespace Catalogo_de_Comercio
             this.lblast2.Text = "*";
             this.lblast2.Visible = false;
             // 
+            // lblRegistros
+            // 
+            this.lblRegistros.AutoSize = true;
+            this.lblRegistros.BackColor = System.Drawing.Color.DarkGray;
+            this.lblRegistros.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblRegistros.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRegistros.Location = new System.Drawing.Point(1083, 19);
+            this.lblRegistros.Name = "lblRegistros";
+            this.lblRegistros.Size = new System.Drawing.Size(134, 22);
+            this.lblRegistros.TabIndex = 25;
+            this.lblRegistros.Text = "Artículos totales:";
+            // 
+            // lbltotalarticulos
+            // 
+            this.lbltotalarticulos.AutoSize = true;
+            this.lbltotalarticulos.BackColor = System.Drawing.Color.LightSalmon;
+            this.lbltotalarticulos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lbltotalarticulos.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbltotalarticulos.Location = new System.Drawing.Point(1225, 19);
+            this.lbltotalarticulos.Name = "lbltotalarticulos";
+            this.lbltotalarticulos.Size = new System.Drawing.Size(2, 22);
+            this.lbltotalarticulos.TabIndex = 26;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.WhiteSmoke;
             this.ClientSize = new System.Drawing.Size(1425, 653);
+            this.Controls.Add(this.lbltotalarticulos);
+            this.Controls.Add(this.lblRegistros);
             this.Controls.Add(this.lblast2);
             this.Controls.Add(this.lblast1);
             this.Controls.Add(this.lblDescripción);
@@ -494,6 +539,8 @@ namespace Catalogo_de_Comercio
         private System.Windows.Forms.TextBox txtFiltroRapido;
         private System.Windows.Forms.Label lblast1;
         private System.Windows.Forms.Label lblast2;
+        private System.Windows.Forms.Label lblRegistros;
+        private System.Windows.Forms.Label lbltotalarticulos;
     }
 }
 

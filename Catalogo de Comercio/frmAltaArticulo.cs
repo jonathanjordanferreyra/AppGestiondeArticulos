@@ -70,7 +70,7 @@ namespace Catalogo_de_Comercio
             }
             //valido que se ingrese un decimal con TryParse que devuelve true si no hay letras.
             decimal precio;
-            if (decimal.TryParse(txtPrecio.Text, out precio))
+            if (decimal.TryParse(txtPrecio.Text, out precio) && precio > 0) 
             {
                 txtPrecio.BackColor = Color.White;
                 lblast8.Visible = false;
@@ -79,7 +79,7 @@ namespace Catalogo_de_Comercio
             {
                 txtPrecio.BackColor = Color.Red;
                 lblast8.Visible = true;
-                MessageBox.Show("Formato incorrecto en el precio, solo números.", "Precio incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Formato incorrecto en el precio, solo números positivos.", "Precio incorrecto", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             if(cont == 1)
@@ -192,6 +192,30 @@ namespace Catalogo_de_Comercio
         private void txtImagenUrl_Leave(object sender, EventArgs e)
         {
            cargarImagen(txtImagenUrl.Text);
+        }
+
+        private void btnAgregarCategoria_Click(object sender, EventArgs e)
+        {
+            frmAltaCategoria altaCategoria = new frmAltaCategoria();
+            if(altaCategoria.ShowDialog() == DialogResult.OK)
+            {
+                CategoriaNegocio categorianegocio = new CategoriaNegocio();
+                cmbCategoria.DataSource = categorianegocio.listar();
+                cmbCategoria.DisplayMember = "Descripcion";
+                cmbCategoria.ValueMember = "Id";
+            }
+        }
+
+        private void btnAgregarMarca_Click(object sender, EventArgs e)
+        {
+            frmAltaMarca altaMarca = new frmAltaMarca();
+            if(altaMarca.ShowDialog() == DialogResult.OK)
+            {
+                MarcaNegocio marcaNegocio = new MarcaNegocio();
+                cmbMarca.DataSource = marcaNegocio.listar();
+                cmbMarca.DisplayMember = "Descripcion";
+                cmbMarca.ValueMember = "Id";
+            }
         }
     }
 }

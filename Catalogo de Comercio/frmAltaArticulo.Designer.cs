@@ -54,6 +54,8 @@
             this.lblast6 = new System.Windows.Forms.Label();
             this.lblast7 = new System.Windows.Forms.Label();
             this.lblast8 = new System.Windows.Forms.Label();
+            this.btnAgregarCategoria = new System.Windows.Forms.Button();
+            this.btnAgregarMarca = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pbxArticulo)).BeginInit();
             this.panelfrvalta.SuspendLayout();
             this.SuspendLayout();
@@ -227,7 +229,7 @@
             // 
             this.pbxArticulo.Location = new System.Drawing.Point(22, 27);
             this.pbxArticulo.Name = "pbxArticulo";
-            this.pbxArticulo.Size = new System.Drawing.Size(264, 255);
+            this.pbxArticulo.Size = new System.Drawing.Size(302, 255);
             this.pbxArticulo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pbxArticulo.TabIndex = 16;
             this.pbxArticulo.TabStop = false;
@@ -242,7 +244,7 @@
             this.panelfrvalta.Location = new System.Drawing.Point(631, 139);
             this.panelfrvalta.MinimumSize = new System.Drawing.Size(303, 287);
             this.panelfrvalta.Name = "panelfrvalta";
-            this.panelfrvalta.Size = new System.Drawing.Size(312, 311);
+            this.panelfrvalta.Size = new System.Drawing.Size(340, 311);
             this.panelfrvalta.TabIndex = 17;
             // 
             // labelimagenALTA
@@ -250,7 +252,7 @@
             this.labelimagenALTA.AutoSize = true;
             this.labelimagenALTA.BackColor = System.Drawing.Color.DarkGray;
             this.labelimagenALTA.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelimagenALTA.Location = new System.Drawing.Point(85, 4);
+            this.labelimagenALTA.Location = new System.Drawing.Point(105, 4);
             this.labelimagenALTA.Name = "labelimagenALTA";
             this.labelimagenALTA.Size = new System.Drawing.Size(147, 20);
             this.labelimagenALTA.TabIndex = 18;
@@ -346,12 +348,38 @@
             this.lblast8.Text = "*";
             this.lblast8.Visible = false;
             // 
+            // btnAgregarCategoria
+            // 
+            this.btnAgregarCategoria.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnAgregarCategoria.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarCategoria.Location = new System.Drawing.Point(568, 285);
+            this.btnAgregarCategoria.Name = "btnAgregarCategoria";
+            this.btnAgregarCategoria.Size = new System.Drawing.Size(21, 23);
+            this.btnAgregarCategoria.TabIndex = 26;
+            this.btnAgregarCategoria.Text = "+";
+            this.btnAgregarCategoria.UseVisualStyleBackColor = true;
+            this.btnAgregarCategoria.Click += new System.EventHandler(this.btnAgregarCategoria_Click);
+            // 
+            // btnAgregarMarca
+            // 
+            this.btnAgregarMarca.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.btnAgregarMarca.Font = new System.Drawing.Font("Century", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAgregarMarca.Location = new System.Drawing.Point(568, 337);
+            this.btnAgregarMarca.Name = "btnAgregarMarca";
+            this.btnAgregarMarca.Size = new System.Drawing.Size(21, 23);
+            this.btnAgregarMarca.TabIndex = 27;
+            this.btnAgregarMarca.Text = "+";
+            this.btnAgregarMarca.UseVisualStyleBackColor = true;
+            this.btnAgregarMarca.Click += new System.EventHandler(this.btnAgregarMarca_Click);
+            // 
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGray;
             this.ClientSize = new System.Drawing.Size(1092, 653);
+            this.Controls.Add(this.btnAgregarMarca);
+            this.Controls.Add(this.btnAgregarCategoria);
             this.Controls.Add(this.lblast8);
             this.Controls.Add(this.lblast7);
             this.Controls.Add(this.lblast6);
@@ -419,5 +447,7 @@
         private System.Windows.Forms.Label lblast6;
         private System.Windows.Forms.Label lblast7;
         private System.Windows.Forms.Label lblast8;
+        private System.Windows.Forms.Button btnAgregarCategoria;
+        private System.Windows.Forms.Button btnAgregarMarca;
     }
 }

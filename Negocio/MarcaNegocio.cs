@@ -37,5 +37,27 @@ namespace Negocio
                 datos.CerrarConexion();
             }
         }
+        //Metodo para agregar Marca a la DB
+        public void Agregar(Marca nuevaMarca)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                List<Marca>MarcasExistentes = listar();
+                if(MarcasExistentes.Any(x => x.Descripcion.ToUpper() == nuevaMarca.Descripcion.ToUpper()))
+                {
+                    throw new Exception("Esta marca ya existe, ingrese una nueva.");
+                }
+
+                datos.SetearConsulta("insert into MARCAS (Descripcion) values (@Descripcion)");
+                datos.SetearParametros("@Descripcion", nuevaMarca.Descripcion);
+                datos.EjecutarAccion();
+            }
+
+            finally
+            {
+                datos.CerrarConexion();
+            }
+        }
     }
 }
