@@ -33,7 +33,7 @@ Aplicación de escritorio desarrollada en C# .NET WinForms para la gestión comp
 ## 🚀 Instalación
 
 1. Clonar el repositorio
-git clone https://github.com/TU_USUARIO/AppGestiondeArticulos.git
+$ git clone
 2. Ejecutar el script SQL
 3. Comprobar la cadena de conexión
 👨‍💻 Autor
