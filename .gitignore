@@ -1,70 +1,23 @@
-# Build
-bin/
-obj/
-[Bb]uild/
-[Bb]uilds/
-
 # Visual Studio
 .vs/
+
+# Build results
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# User-specific files
 *.user
 *.suo
-*.userprefs
+*.userosscache
 *.sln.docstates
 
-# Rider / JetBrains
-.idea/
-*.sublime-workspace
-*.sublime-project
-
-# NuGet
-packages/
+# NuGet Packages
 *.nupkg
-.nuget/
-
-# Visual Studio Code
-.vscode/
-
-# Rider caches
-.idea/
-
-# Visual Studio temporary files
-*.tmp
-*.log
-
-# OS
-Thumbs.db
-.DS_Store
-
-# Publish
-publish/
-*.Publish.xml
-
-# Test
-TestResults/
-
-# Resx designer
-*.Designer.cs
-
-# NuGet packages
-**/packages/*
-
-# Binarios generados
-*.exe
-*.dll
-
-# User-specific configuration files (containing connection strings, etc.)
-app.config
-appsettings.json
-appsettings.Development.json
-*.local
-
-# Logs
-logs/
-*.log
-
-# Imágenes/archivos que no querés versionar (opcional)
-Resources/Images/
-
-# Others
-*.vsix
-
+*.nuspec
+packages/
