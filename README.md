@@ -26,8 +26,8 @@ Aplicación de escritorio desarrollada en C# .NET WinForms para la gestión comp
 - **Control de Versiones**: Git/GitHub
 
 ## 📸 Capturas de Pantalla
+![Animation](https://github.com/user-attachments/assets/d075fcc1-b6fa-4015-ac1d-e490b8a4bc9e)
 <img width="1772" height="844" alt="Captura de pantalla 2025-09-02 170633" src="https://github.com/user-attachments/assets/4132cc12-80a0-4951-ae29-c3ed60502e30" />
-
 <img width="1778" height="859" alt="Captura de pantalla 2025-09-02 170518" src="https://github.com/user-attachments/assets/a3f58ff9-8f4c-4e29-b4d2-635a96bc0c43" />
 
 ## 🚀 Instalación
